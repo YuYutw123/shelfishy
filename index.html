@@ -1,11 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>哈哈</title>
-</head>
-<body>
-    隨便看看
-</body>
+
+<html class="light" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>ISBN Finder</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link
+            crossorigin=""
+            href="https://fonts.gstatic.com"
+            rel="preconnect"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            rel="stylesheet"
+        />
+        <script>
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: "#137fec",
+                            "background-light": "#f6f7f8",
+                            "background-dark": "#101922",
+                        },
+                        fontFamily: {
+                            display: ["Inter", "sans-serif"],
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px",
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            .material-symbols-outlined {
+                font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0,
+                    "opsz" 24;
+            }
+        </style>
+    </head>
+    <body
+        class="bg-background-light dark:bg-background-dark font-display text-[#333333] dark:text-slate-200"
+    >
+        <div class="relative flex min-h-screen w-full flex-col">
+            <!-- Top Nav Bar -->
+            <header
+                class="flex w-full items-center justify-center border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark"
+            >
+                <div
+                    class="flex w-full max-w-5xl items-center justify-between whitespace-nowrap px-6 py-4"
+                >
+                    <div
+                        class="flex items-center gap-3 text-[#0d141b] dark:text-white"
+                    >
+                        <span
+                            class="material-symbols-outlined text-primary text-2xl"
+                            >barcode_scanner</span
+                        >
+                        <h2 class="text-lg font-bold tracking-tight">
+                            ISBN Finder
+                        </h2>
+                    </div>
+                </div>
+            </header>
+            <main
+                class="flex w-full flex-1 flex-col items-center px-4 py-8 sm:px-6 lg:py-12"
+            >
+                <div class="w-full max-w-3xl">
+                    <!-- Page Heading & Search Form -->
+                    <section
+                        class="flex flex-col gap-6 rounded-xl bg-white dark:bg-slate-900/50 p-6 shadow-sm"
+                    >
+                        <div class="flex flex-col gap-2">
+                            <h1
+                                class="text-3xl font-black tracking-tighter text-[#0d141b] dark:text-white"
+                            >
+                                Look Up a Book by its ISBN
+                            </h1>
+                            <p
+                                class="text-base text-slate-500 dark:text-slate-400"
+                            >
+                                Enter a 10 or 13-digit ISBN to find book
+                                details.
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-4 sm:flex-row">
+                            <div class="flex-1">
+                                <label class="sr-only" for="isbn-input"
+                                    >ISBN</label
+                                >
+                                <input
+                                    class="form-input h-12 w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-slate-300 bg-background-light px-4 text-base placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/50 dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-500"
+                                    id="isbn-input"
+                                    placeholder="Enter 10 or 13-digit ISBN"
+                                    value=""
+                                />
+                            </div>
+                            <button
+                                class="flex h-12 min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-5 text-base font-bold text-white shadow-sm transition-colors hover:bg-primary/90"
+                            >
+                                <span class="material-symbols-outlined text-xl"
+                                    >search</span
+                                >
+                                <span class="truncate">Search</span>
+                            </button>
+                        </div>
+                    </section>
+                    <!-- Spacer -->
+                    <div
+                        class="my-8 h-px w-full bg-slate-200 dark:bg-slate-800"
+                    ></div>
+                    <!-- Results Display Area -->
+                    <div
+                        class="flex min-h-[400px] flex-col items-center justify-center"
+                    >
+                        <!-- Example: Result Found -->
+                        <div class="w-full">
+                            <div
+                                class="flex w-full flex-col gap-6 rounded-xl bg-white p-6 shadow-sm dark:bg-slate-900/50 sm:flex-row sm:gap-8 sm:p-8"
+                            >
+                                <div
+                                    class="h-64 w-48 flex-shrink-0 self-center rounded-lg bg-slate-200 bg-cover bg-center bg-no-repeat shadow-md dark:bg-slate-700 sm:self-start"
+                                    data-alt="A placeholder book cover with a light gray background and dark text that says Book Cover"
+                                    style="
+                                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAjySvaId7iqZ0UBnod3DbibTSZE3RPvpWTrfR5efwTxmyE1572O4q-FZbOM0LyGtjJynMW6c2vnjgRF2Dyoqm52yotymTwM45OdPGOz0GeLmzpLQIp9Yf1wUXkHINj-rBg0gwsSALWUToWfhH-BhtFH6TFJkW7_HDjFlSoFaS3NIj7HPwOBkEkmsFyEzmH3FxfYOSq-1QITEzAyV9z7Yt9o2go0toVjWdhHiX78RWW14r5Q1dc2kjK87j0ll7VKv8RVMIhOtn9vkXP');
+                                    "
+                                ></div>
+                                <div class="flex flex-col gap-4">
+                                    <div>
+                                        <h2
+                                            class="text-2xl font-bold leading-tight text-[#0d141b] dark:text-white"
+                                        >
+                                            The Midnight Library
+                                        </h2>
+                                        <p
+                                            class="text-lg text-slate-600 dark:text-slate-300"
+                                        >
+                                            by Matt Haig
+                                        </p>
+                                    </div>
+                                    <p
+                                        class="text-base text-slate-500 dark:text-slate-400"
+                                    >
+                                        Somewhere out beyond the edge of the
+                                        universe there is a library that
+                                        contains an infinite number of books,
+                                        each one the story of another reality.
+                                        One tells the story of your life as it
+                                        is, along with another book for the
+                                        other life you could have lived if you
+                                        had made a different choice at any point
+                                        in your life.
+                                    </p>
+                                    <div
+                                        class="mt-2 grid grid-cols-2 gap-x-6 gap-y-4 text-sm"
+                                    >
+                                        <div>
+                                            <p
+                                                class="font-semibold text-slate-700 dark:text-slate-200"
+                                            >
+                                                Publisher
+                                            </p>
+                                            <p
+                                                class="text-slate-500 dark:text-slate-400"
+                                            >
+                                                Viking
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p
+                                                class="font-semibold text-slate-700 dark:text-slate-200"
+                                            >
+                                                Publication Date
+                                            </p>
+                                            <p
+                                                class="text-slate-500 dark:text-slate-400"
+                                            >
+                                                August 13, 2020
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p
+                                                class="font-semibold text-slate-700 dark:text-slate-200"
+                                            >
+                                                Page Count
+                                            </p>
+                                            <p
+                                                class="text-slate-500 dark:text-slate-400"
+                                            >
+                                                304
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p
+                                                class="font-semibold text-slate-700 dark:text-slate-200"
+                                            >
+                                                ISBN-13
+                                            </p>
+                                            <p
+                                                class="text-slate-500 dark:text-slate-400"
+                                            >
+                                                978-0525559474
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Example: Initial/Empty State -->
+                        <!-- 
+                    <div class="flex flex-col items-center gap-4 text-center text-slate-500 dark:text-slate-400">
+                        <span class="material-symbols-outlined text-5xl text-slate-400 dark:text-slate-600">book</span>
+                        <p class="text-base font-medium">Enter an ISBN above to find book details.</p>
+                    </div>
+                    -->
+                        <!-- Example: Loading State -->
+                        <!-- 
+                    <div class="flex flex-col items-center gap-4 text-center text-slate-500 dark:text-slate-400">
+                         <svg class="h-12 w-12 animate-spin text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <p class="text-base font-medium">Searching for book...</p>
+                    </div>
+                    -->
+                        <!-- Example: Error State -->
+                        <!--
+                    <div class="flex flex-col items-center gap-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-500/30 p-8 text-center text-red-700 dark:text-red-300">
+                        <span class="material-symbols-outlined text-5xl">error_outline</span>
+                        <p class="text-base font-medium">No book found for this ISBN.<br>Please check the number and try again.</p>
+                    </div>
+                    --></div>
+                </div>
+            </main>
+        </div>
+    </body>
 </html>
